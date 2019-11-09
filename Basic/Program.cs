@@ -1,6 +1,8 @@
 ﻿using Basic.Core.Repository;
 using Basic.Core.Services;
+using Basic.Data.Models;
 using System;
+using System.Collections.Generic;
 
 namespace Basic
 {
@@ -8,16 +10,14 @@ namespace Basic
     {
         static void Main(string[] args)
         {
-            var vehicleService = new VehicleService();
-            Console.WriteLine("Choose vehicle type from 1 to 3");
-            if (int.TryParse(Console.ReadLine(), out int number))
-            {
-                vehicleService.PowerGroupCalculation(number);
-            }
-            else
-            {
-                Console.WriteLine("Wrong input");
-            }
+            var mathService = new MathService<int>();
+            mathService.AddNumber(12);
+            mathService.AddNumber(89);
+            mathService.AddNumber(-12);
+            mathService.AddNumber(1);
+
+            mathService.ShowStatistics();
+
             Console.ReadKey();
         }
     }

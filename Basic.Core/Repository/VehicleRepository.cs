@@ -34,11 +34,11 @@ namespace Basic.Core.Repository
         /// Read - Vehicles List
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Vehicle> GetVehicles()
+        public List<Vehicle> GetVehicles()
         {
             using (var ctx = new BasicContext())
             {
-                return ctx.Vehicles;
+                return ctx.Vehicles.ToList();
             }
         }
 

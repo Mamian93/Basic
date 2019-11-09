@@ -1,4 +1,5 @@
-﻿using Basic.Data;
+﻿using Basic.Core.Interfaces;
+using Basic.Data;
 using Basic.Data.Enums;
 using Basic.Data.Models;
 using System;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace Basic.Core.Services
 {
-    public class VehicleService
+    public class VehicleService<T> : BaseService<T>
     {
         public void PowerGroupCalculation(int kindOfVehicle)
         {
@@ -21,6 +22,16 @@ namespace Basic.Core.Services
 
                 Console.WriteLine($"Vehicle type: {kindOfVehicle}. Average: {avg}\nMin: {min}\nMax: {max}");
             }
+        }
+
+        public override List<T> MembersCount(List<T> list)
+        {
+            return base.MembersCount(list);
+        }
+
+        public string Hello()
+        {
+            return "Hello from VehicleService ;O";
         }
     }
 }
