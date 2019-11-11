@@ -1,4 +1,5 @@
-﻿using Basic.Core.Models;
+﻿using Basic.Core.Delegates;
+using Basic.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,18 +10,32 @@ namespace Basic.Core.Services
     public class SportService
     {
         private List<int> _scores;
-        public string name { get; set; }
+        public string Name { get; set; }
 
+        public event ScoreAddedDelegate ScoreAdded;
         public SportService(string name)
         {
             _scores = new List<int>();
-            this.name = name;
+            Name = name;
         }
 
         public void AddNumber(int input)
         {
-            _scores.Add(input);
-        }
+            if (input >= 0 && input <= 100)
+            {
+                _scores.Add(input);
+                //jeżeli ScoreAdded jest nullem to znaczy, że nikt nie nasłuchuje tego eventu
+                if (ScoreAdded != null)
+                {
+                    //this informuje, że to ta metoda wywołuje ten event
+                    ScoreAdded(this, new EventArgs());
+                }
+            }
+            else
+            {
+                throw new ArgumentException($"Invalid argument {nameof(input)}");
+            }
+        }        
 
         public void ConvertLetterToNumber(string input)
         {

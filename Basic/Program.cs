@@ -1,4 +1,5 @@
-﻿using Basic.Core.Repository;
+﻿using Basic.Core.Delegates;
+using Basic.Core.Repository;
 using Basic.Core.Services;
 using Basic.Data.Models;
 using System;
@@ -11,34 +12,42 @@ namespace Basic
         static void Main(string[] args)
         {
             var mathService = new SportService("Damian scores");
+            mathService.ScoreAdded += OnScoreAdded; 
             while (true)
             {
-                Console.WriteLine("Provide a number(0 - 100) or a letter(A - F), if you want to exit press [q]: ");
-                var input = Console.ReadLine();
-                if (int.TryParse(input, out int number))
+                try
                 {
-                    if (number < 0 || number > 100)
+                    Console.WriteLine("Provide a number(0 - 100) or a letter(A - F), if you want to exit press [q]: ");
+                    var input = Console.ReadLine();
+                    if (int.TryParse(input, out int number))
                     {
-                        Console.WriteLine("Wrong range, try again");
-                        continue;
+                        mathService.AddNumber(number);
                     }
-                    mathService.AddNumber(number);
+                    else if (input.Trim().ToLower() == "q")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        mathService.ConvertLetterToNumber(input.ToUpper());
+                    }
                 }
-                else if (input.Trim().ToLower() == "q")
+                catch (Exception)
                 {
-                    break;
+                    Console.WriteLine("You gave invalid number!!!");
                 }
-                else
-                {
-                    mathService.ConvertLetterToNumber(input.ToUpper());
-                }
-                
+
             }
 
             var result = mathService.GetStatistics();
             mathService.ShowStatistics(result);
 
             Console.ReadKey();
+        }
+
+        static void OnScoreAdded(object sender, EventArgs args)
+        {
+            Console.WriteLine("A score was added!");
         }
     }
 }

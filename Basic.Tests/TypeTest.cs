@@ -7,8 +7,35 @@ using Xunit;
 
 namespace Basic.Tests
 {
+    public delegate string WriteLogDelegate(string logMsg);
+
     public class TypeTest
     {
+        int counter = 0;
+        [Fact]
+        public void WriteLogDelegateCanPointToMethod()
+        {
+            //var log = new WriteLogDelegate(ReturnMessage);
+            WriteLogDelegate log = ReturnMessage;
+            log += ReturnMessage;
+            log += ReturnMessagePlus;
+            var result = log("Error just hapened!");
+            
+            Assert.Equal(3, counter);
+        }
+
+        string ReturnMessage(string msg)
+        {
+            counter++;
+            return msg;
+        }
+
+        string ReturnMessagePlus(string msg)
+        {
+            counter++;
+            return msg;
+        }
+
         [Fact]
         public void StringsBehaveLikeValueTypes()
         {
@@ -48,7 +75,7 @@ namespace Basic.Tests
             var sport1 = GetSport("Sport 1");
             GetSportSetNameRef(ref sport1, "New era");
 
-            Assert.Equal("New era", sport1.name);
+            Assert.Equal("New era", sport1.Name);
         }
 
         private void GetSportSetNameRef(ref SportService sport, string name)
@@ -62,12 +89,12 @@ namespace Basic.Tests
             var sport1 = GetSport("Sport 1");
             GetSportSetName(sport1, "New era");
 
-            Assert.Equal("New era", sport1.name);
+            Assert.Equal("New era", sport1.Name);
         }
 
         private void GetSportSetName(SportService sport, string name)
         {
-            sport.name = name;
+            sport.Name = name;
         }
 
         [Fact]
@@ -76,8 +103,8 @@ namespace Basic.Tests
             var sport1 = GetSport("Sport 1");
             var sport2 = GetSport("Sport 2");
 
-            Assert.Equal("Sport 1", sport1.name);
-            Assert.Equal("Sport 2", sport2.name);
+            Assert.Equal("Sport 1", sport1.Name);
+            Assert.Equal("Sport 2", sport2.Name);
         }
 
         [Fact]
@@ -86,7 +113,7 @@ namespace Basic.Tests
             var sport1 = GetSport("Sport 1");
             var sport2 = sport1;
 
-            Assert.Equal(sport2.name, sport1.name);
+            Assert.Equal(sport2.Name, sport1.Name);
         }
 
         [Fact]
@@ -94,10 +121,10 @@ namespace Basic.Tests
         {
             var sport1 = GetSport("Sport 1");
             var sport2 = sport1;
-            sport2.name = "Sport 2";
+            sport2.Name = "Sport 2";
 
-            Assert.NotEqual("Sport 1", sport1.name);
-            Assert.Equal("Sport 2", sport1.name);
+            Assert.NotEqual("Sport 1", sport1.Name);
+            Assert.Equal("Sport 2", sport1.Name);
         }
 
         [Fact]
