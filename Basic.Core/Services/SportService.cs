@@ -1,6 +1,7 @@
 ﻿using Basic.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Basic.Core.Services
@@ -21,9 +22,40 @@ namespace Basic.Core.Services
             _scores.Add(input);
         }
 
+        public void ConvertLetterToNumber(string input)
+        {
+            int result;
+            switch (input)
+            {
+                case "A":
+                    result = 100;
+                    break;
+                case "B":
+                    result = 80;
+                    break;
+                case "C":
+                    result = 60;
+                    break;
+                case "D":
+                    result = 40;
+                    break;
+                case "E":
+                    result = 20;
+                    break;
+                default:
+                    result = 0;
+                    break;
+            }
+            _scores.Add(result);
+        }
+
         public StatisticsModel GetStatistics()
         {
             var statisticModel = new StatisticsModel();
+            if (!_scores.Any())
+            {
+                return statisticModel;
+            }
             statisticModel.Min = int.MaxValue;
             statisticModel.Max = int.MinValue;
             statisticModel.Avg = 0;

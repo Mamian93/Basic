@@ -10,6 +10,67 @@ namespace Basic.Tests
     public class TypeTest
     {
         [Fact]
+        public void StringsBehaveLikeValueTypes()
+        {
+            string name = "Damian";
+            MakeUppercase(ref name);
+
+            Assert.Equal("DAMIAN", name);
+        }
+
+        private void MakeUppercase(ref string name)
+        {
+           name = name.ToUpper();
+        }
+
+        [Fact]
+        public void ValueTypes()
+        {
+            int num = GetInt();
+            SetInt(ref num);
+
+            Assert.Equal(43, num);
+        }
+
+        private void SetInt(ref int num)
+        {
+            num = 43;
+        }
+
+        private int GetInt()
+        {
+            return 3;
+        }
+
+        [Fact]
+        public void CSharpIsPassByReferences()
+        {
+            var sport1 = GetSport("Sport 1");
+            GetSportSetNameRef(ref sport1, "New era");
+
+            Assert.Equal("New era", sport1.name);
+        }
+
+        private void GetSportSetNameRef(ref SportService sport, string name)
+        {
+            sport = new SportService(name);
+        }
+
+        [Fact]
+        public void CSharpIsPassByValue()
+        {
+            var sport1 = GetSport("Sport 1");
+            GetSportSetName(sport1, "New era");
+
+            Assert.Equal("New era", sport1.name);
+        }
+
+        private void GetSportSetName(SportService sport, string name)
+        {
+            sport.name = name;
+        }
+
+        [Fact]
         public void NameTestDifferentObjects()
         {
             var sport1 = GetSport("Sport 1");
