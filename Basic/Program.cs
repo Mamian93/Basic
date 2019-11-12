@@ -1,4 +1,5 @@
 ﻿using Basic.Core.Delegates;
+using Basic.Core.Interfaces;
 using Basic.Core.Repository;
 using Basic.Core.Services;
 using Basic.Data.Models;
@@ -11,8 +12,18 @@ namespace Basic
     {
         static void Main(string[] args)
         {
-            var mathService = new SportService("Damian scores");
-            mathService.ScoreAdded += OnScoreAdded; 
+            var mathService = new DiskSportScoresService("Damian scores");
+            mathService.ScoreAdded += OnScoreAdded;
+            EnterScores(mathService);
+
+            //var result = mathService.GetStatistics();
+            //mathService.ShowStatistics(result);
+
+            Console.ReadKey();
+        }
+
+        private static void EnterScores(ISportScores mathService)
+        {
             while (true)
             {
                 try
@@ -29,20 +40,14 @@ namespace Basic
                     }
                     else
                     {
-                        mathService.ConvertLetterToNumber(input.ToUpper());
+                        //mathService.ConvertLetterToNumber(input.ToUpper());
                     }
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("You gave invalid number!!!");
                 }
-
             }
-
-            var result = mathService.GetStatistics();
-            mathService.ShowStatistics(result);
-
-            Console.ReadKey();
         }
 
         static void OnScoreAdded(object sender, EventArgs args)

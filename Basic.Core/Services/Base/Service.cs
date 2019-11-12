@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Basic.Core.Services
 {
-    public class BaseService<T> : IBaseService<T>
+    public class Service<T> : IBaseService<T>
     {
         public virtual string Hello()
         {

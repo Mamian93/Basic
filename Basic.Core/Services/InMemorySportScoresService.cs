@@ -1,4 +1,5 @@
 ﻿using Basic.Core.Delegates;
+using Basic.Core.Interfaces;
 using Basic.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -7,19 +8,18 @@ using System.Text;
 
 namespace Basic.Core.Services
 {
-    public class SportService
+    public class InMemorySportScoresService : SportScores
     {
         private List<int> _scores;
-        public string Name { get; set; }
 
-        public event ScoreAddedDelegate ScoreAdded;
-        public SportService(string name)
+        public override event ScoreAddedDelegate ScoreAdded;
+        public InMemorySportScoresService(string name) : base(name)
         {
             _scores = new List<int>();
             Name = name;
         }
 
-        public void AddNumber(int input)
+        public override void AddNumber(int input)
         {
             if (input >= 0 && input <= 100)
             {
@@ -37,7 +37,7 @@ namespace Basic.Core.Services
             }
         }        
 
-        public void ConvertLetterToNumber(string input)
+        public override void ConvertLetterToNumber(string input)
         {
             int result;
             switch (input)
@@ -64,7 +64,7 @@ namespace Basic.Core.Services
             _scores.Add(result);
         }
 
-        public StatisticsModel GetStatistics()
+        public override StatisticsModel GetStatistics()
         {
             var statisticModel = new StatisticsModel();
             if (!_scores.Any())
@@ -87,7 +87,7 @@ namespace Basic.Core.Services
             return statisticModel;
         }
 
-        public void ShowStatistics(StatisticsModel statisticsModel)
+        public override void ShowStatistics(StatisticsModel statisticsModel)
         {
             Console.WriteLine(statisticsModel.Min);
             Console.WriteLine(statisticsModel.Max);

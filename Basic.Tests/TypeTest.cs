@@ -78,9 +78,9 @@ namespace Basic.Tests
             Assert.Equal("New era", sport1.Name);
         }
 
-        private void GetSportSetNameRef(ref SportService sport, string name)
+        private void GetSportSetNameRef(ref InMemorySportScoresService sport, string name)
         {
-            sport = new SportService(name);
+            sport = new InMemorySportScoresService(name);
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace Basic.Tests
             Assert.Equal("New era", sport1.Name);
         }
 
-        private void GetSportSetName(SportService sport, string name)
+        private void GetSportSetName(InMemorySportScoresService sport, string name)
         {
             sport.Name = name;
         }
@@ -173,9 +173,9 @@ namespace Basic.Tests
             return stringList;
         }
 
-        private SportService GetSport(string name)
+        private InMemorySportScoresService GetSport(string name)
         {
-            return new SportService(name);
+            return new InMemorySportScoresService(name);
         }
     }
 }

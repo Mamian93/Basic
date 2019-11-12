@@ -10,7 +10,7 @@ namespace Basic.Tests
         public void AddingNumbers()
         {
             //Arrange
-            var mathSerive = new SportService("Damian scores");
+            var mathSerive = new InMemorySportScoresService("Damian scores");
             mathSerive.AddNumber(12);
             mathSerive.AddNumber(0);
             mathSerive.AddNumber(6);

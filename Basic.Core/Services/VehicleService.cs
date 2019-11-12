@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Basic.Core.Services
 {
-    public class VehicleService<T> : BaseService<T>
+    public class VehicleService<T> : Service<T>
     {
         public void PowerGroupCalculation(int kindOfVehicle)
         {
