@@ -16,12 +16,16 @@ namespace Basic.Core.Services
 
         public override void AddNumber(int score)
         {
-            var path = $"{nameof(Name)}.txt";
-            if (!File.Exists(path))
+            var path = $"..\\{nameof(Name)}.txt";
+            using (StreamWriter sr = File.AppendText(path))
             {
-                File.Create(path);
+                sr.WriteLine(score);
+                if (ScoreAdded != null)
+                {
+                    ScoreAdded(this, new EventArgs());
+                }
+                sr.Close();
             }
-            File.AppendText(path).Write(score.ToString());
         }
 
         public override void ConvertLetterToNumber(string input)

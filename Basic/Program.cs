@@ -15,12 +15,12 @@ namespace Basic
             var mathService = new DiskSportScoresService("Damian scores");
             mathService.ScoreAdded += OnScoreAdded;
             EnterScores(mathService);
-
-            //var result = mathService.GetStatistics();
-            //mathService.ShowStatistics(result);
+            var result = mathService.GetStatistics();
+            mathService.ShowStatistics(result);
 
             Console.ReadKey();
         }
+
 
         private static void EnterScores(ISportScores mathService)
         {
