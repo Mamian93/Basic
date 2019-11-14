@@ -66,32 +66,19 @@ namespace Basic.Core.Services
 
         public override StatisticsModel GetStatistics()
         {
-            var statisticModel = new StatisticsModel();
-            if (!_scores.Any())
-            {
-                return statisticModel;
-            }
-            statisticModel.Min = int.MaxValue;
-            statisticModel.Max = int.MinValue;
-            statisticModel.Avg = 0;
+            var statisticModel = new StatisticsModel();                  
 
             foreach (var score in _scores)
             {
-                statisticModel.Min = Math.Min(statisticModel.Min, score);
-                statisticModel.Max = Math.Max(statisticModel.Max, score);
-
-                statisticModel.Avg += score;
+                statisticModel.Add(score);
             }
 
-            statisticModel.Avg = statisticModel.Avg / _scores.Count;
             return statisticModel;
         }
 
         public override void ShowStatistics(StatisticsModel statisticsModel)
         {
-            Console.WriteLine(statisticsModel.Min);
-            Console.WriteLine(statisticsModel.Max);
-            Console.WriteLine(statisticsModel.Avg);
+            base.ShowStatistics(statisticsModel);
         }
     }
 }

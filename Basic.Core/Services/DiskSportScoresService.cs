@@ -35,12 +35,27 @@ namespace Basic.Core.Services
 
         public override StatisticsModel GetStatistics()
         {
-            throw new NotImplementedException();
+            var result = new StatisticsModel();
+
+            var path = $"..\\{nameof(Name)}.txt";
+            using (var sr = File.OpenText(path))
+            {
+                var line = sr.ReadLine();
+                while (line != null)
+                {
+                    if (int.TryParse(line, out int num))
+                    {
+                        result.Add(num);
+                    }
+                    line = sr.ReadLine();
+                }
+            }
+            return result;
         }
 
         public override void ShowStatistics(StatisticsModel statisticsModel)
         {
-            throw new NotImplementedException();
+            base.ShowStatistics(statisticsModel);
         }
     }
 }

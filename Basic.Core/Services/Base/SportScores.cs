@@ -21,6 +21,11 @@ namespace Basic.Core.Services
 
         public abstract StatisticsModel GetStatistics();
 
-        public abstract void ShowStatistics(StatisticsModel statisticsModel);
+        public virtual void ShowStatistics(StatisticsModel statisticsModel)
+        {
+            Console.WriteLine(statisticsModel.Min);
+            Console.WriteLine(statisticsModel.Max);
+            Console.WriteLine(statisticsModel.Avg);
+        }
     }
 }
