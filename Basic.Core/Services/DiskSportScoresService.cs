@@ -20,17 +20,16 @@ namespace Basic.Core.Services
             using (StreamWriter sr = File.AppendText(path))
             {
                 sr.WriteLine(score);
-                if (ScoreAdded != null)
-                {
-                    ScoreAdded(this, new EventArgs());
-                }
+
+                ScoreAdded?.Invoke(this, new EventArgs());
+
                 sr.Close();
             }
         }
 
-        public override void ConvertLetterToNumber(string input)
+        public override int ConvertLetterToNumber(string input)
         {
-            throw new NotImplementedException();
+            return base.ConvertLetterToNumber(input);
         }
 
         public override StatisticsModel GetStatistics()

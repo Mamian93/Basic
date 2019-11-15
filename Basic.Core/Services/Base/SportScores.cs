@@ -17,7 +17,24 @@ namespace Basic.Core.Services
 
         public abstract void AddNumber(int score);
 
-        public abstract void ConvertLetterToNumber(string input);
+        public virtual int ConvertLetterToNumber(string input)
+        {
+            switch (input)
+            {
+                case "A":
+                    return 100;
+                case "B":
+                    return 80;
+                case "C":
+                    return 60;
+                case "D":
+                    return 40;
+                case "E":
+                    return 20;
+                default:
+                    return 0;
+            }
+        }
 
         public abstract StatisticsModel GetStatistics();
 

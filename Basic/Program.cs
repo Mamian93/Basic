@@ -32,6 +32,11 @@ namespace Basic
                     var input = Console.ReadLine();
                     if (int.TryParse(input, out int number))
                     {
+                        if (number <= 0 || number >= 100)
+                        {
+                            Console.WriteLine($"Wrong input, the {number} is not valid");
+                            continue;
+                        }
                         mathService.AddNumber(number);
                     }
                     else if (input.Trim().ToLower() == "q")
@@ -40,7 +45,8 @@ namespace Basic
                     }
                     else
                     {
-                        //mathService.ConvertLetterToNumber(input.ToUpper());
+                        var num = mathService.ConvertLetterToNumber(input.ToUpper());
+                        mathService.AddNumber(num);
                     }
                 }
                 catch (Exception)

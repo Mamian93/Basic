@@ -24,44 +24,20 @@ namespace Basic.Core.Services
             if (input >= 0 && input <= 100)
             {
                 _scores.Add(input);
+
                 //jeżeli ScoreAdded jest nullem to znaczy, że nikt nie nasłuchuje tego eventu
-                if (ScoreAdded != null)
-                {
-                    //this informuje, że to ta metoda wywołuje ten event
-                    ScoreAdded(this, new EventArgs());
-                }
+                //this informuje, że to ta metoda wywołuje ten event
+                ScoreAdded?.Invoke(this, new EventArgs());
             }
             else
             {
                 throw new ArgumentException($"Invalid argument {nameof(input)}");
             }
-        }        
+        }
 
-        public override void ConvertLetterToNumber(string input)
+        public override int ConvertLetterToNumber(string input)
         {
-            int result;
-            switch (input)
-            {
-                case "A":
-                    result = 100;
-                    break;
-                case "B":
-                    result = 80;
-                    break;
-                case "C":
-                    result = 60;
-                    break;
-                case "D":
-                    result = 40;
-                    break;
-                case "E":
-                    result = 20;
-                    break;
-                default:
-                    result = 0;
-                    break;
-            }
-            _scores.Add(result);
+            return base.ConvertLetterToNumber(input);
         }
 
         public override StatisticsModel GetStatistics()

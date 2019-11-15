@@ -11,7 +11,7 @@ namespace Basic.Core.Interfaces
         void AddNumber(int score);
         StatisticsModel GetStatistics();
         void ShowStatistics(StatisticsModel statisticsModel);
-        void ConvertLetterToNumber(string letter);
+        int ConvertLetterToNumber(string letter);
         public string Name { get; }
 
         event ScoreAddedDelegate ScoreAdded;
