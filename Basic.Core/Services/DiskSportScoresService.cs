@@ -13,10 +13,11 @@ namespace Basic.Core.Services
         { }
 
         public override event ScoreAddedDelegate ScoreAdded;
+        public override event ZeroScoreWarningDelegate ZeroScoreWarning;
 
         public override void AddNumber(int score)
         {
-            var path = $"..\\{nameof(Name)}.txt";
+            var path = $@"..\{Name}.txt";
             using (StreamWriter sr = File.AppendText(path))
             {
                 sr.WriteLine(score);
@@ -24,6 +25,19 @@ namespace Basic.Core.Services
                 ScoreAdded?.Invoke(this, new EventArgs());
 
                 sr.Close();
+            }
+
+            if (score == 0)
+            {
+                var zeroWarningPath = $@"C:\Users\T430\Desktop\Damian\Scores\{Name}.txt";
+                using (StreamWriter sr = File.AppendText(zeroWarningPath))
+                {
+                    sr.WriteLine($"score, added {DateTime.UtcNow}");
+
+                    ZeroScoreWarning?.Invoke(this, new EventArgs());
+
+                    sr.Close();
+                }
             }
         }
 

@@ -14,6 +14,7 @@ namespace Basic
         {
             var mathService = new DiskSportScoresService("Damian scores");
             mathService.ScoreAdded += OnScoreAdded;
+            mathService.ZeroScoreWarning += OnZeroWarningScoreAdded;
             EnterScores(mathService);
             var result = mathService.GetStatistics();
             mathService.ShowStatistics(result);
@@ -32,7 +33,7 @@ namespace Basic
                     var input = Console.ReadLine();
                     if (int.TryParse(input, out int number))
                     {
-                        if (number <= 0 || number >= 100)
+                        if (number < 0 || number > 100)
                         {
                             Console.WriteLine($"Wrong input, the {number} is not valid");
                             continue;
@@ -59,6 +60,11 @@ namespace Basic
         static void OnScoreAdded(object sender, EventArgs args)
         {
             Console.WriteLine("A score was added!");
+        }
+
+        static void OnZeroWarningScoreAdded(object sender, EventArgs args)
+        {
+            Console.WriteLine("Warning of 0 score was reported!");
         }
     }
 }

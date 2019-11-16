@@ -15,5 +15,6 @@ namespace Basic.Core.Interfaces
         public string Name { get; }
 
         event ScoreAddedDelegate ScoreAdded;
+        event ZeroScoreWarningDelegate ZeroScoreWarning;
     }
 }

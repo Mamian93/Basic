@@ -14,6 +14,7 @@ namespace Basic.Core.Services
         }
 
         public abstract event ScoreAddedDelegate ScoreAdded;
+        public abstract event ZeroScoreWarningDelegate ZeroScoreWarning;
 
         public abstract void AddNumber(int score);
 

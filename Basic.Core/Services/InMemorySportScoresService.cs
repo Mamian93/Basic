@@ -13,6 +13,8 @@ namespace Basic.Core.Services
         private List<int> _scores;
 
         public override event ScoreAddedDelegate ScoreAdded;
+        public override event ZeroScoreWarningDelegate ZeroScoreWarning;
+
         public InMemorySportScoresService(string name) : base(name)
         {
             _scores = new List<int>();
