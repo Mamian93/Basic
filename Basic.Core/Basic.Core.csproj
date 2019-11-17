@@ -12,4 +12,8 @@
     <ProjectReference Include="..\Basic.Data\Basic.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Base\" />
+  </ItemGroup>
+
 </Project>
